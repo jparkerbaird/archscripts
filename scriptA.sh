@@ -4,7 +4,6 @@
 
 
 # --- Encrypt primary partiion and create logical partions ---
-
 cryptsetup luksFormat /dev/sda2
 cryptsetup open /dev/sda2 cryptlvm
 
@@ -35,4 +34,4 @@ pacstrap /mnt base linux linux-firmware dhcpcd wpa_supplicant netctl dialog vim 
 
 # Fstab
 genfstab -U /mnt >> /mnt/etc/fstab
-# arch-chroot /mnt
+
