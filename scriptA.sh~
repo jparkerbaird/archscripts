@@ -1,0 +1,41 @@
+# You should have the primary partitions set
+    # and mirrors checked before this
+
+
+# --- Encrypt primary partiion and create logical partions ---
+
+cryptsetup luksFormat /dev/sda2
+cryptsetup open /dev/sda2 cryptlvm
+
+# Create the logical partitions (swap and root)
+pvcreate /dev/mapper/cryptlvm
+vgcreate MyVolGroup /dev/mapper/cryptlvm
+lvcreate -L 8G MyVolGroup -n swap
+lvcreate -L 32G MyVolGroup -n root
+
+# Format the logical partitions
+mkfs.ext4 /dev/MyVolGroup/root
+mkswap /dev/MyVolGroup/swap
+
+# Format the boot partition
+mkfs.ext4 /dev/sda1
+
+
+# Put the logical partitions into use
+mount /dev/MyVolGroup/root /mnt
+swapon /dev/MyVolGroup/swap
+
+
+# Install initial packages
+pacstrap \
+    base \ # Linux base
+    linux linux-firmware \ # Kernal stuff and binary blobs
+    dhcpcd wpa_supplicant netctl dialog \ # Wifi
+    vim \ # Editor
+    grub \ # Bootloader
+    lvm2 \ # 
+
+
+# Fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt

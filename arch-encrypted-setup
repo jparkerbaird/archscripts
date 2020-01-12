@@ -1,0 +1,18 @@
+# This file assumes legacy boot.
+################################
+
+1) Primary partitions
+# --- Primary partitions needed before running ---
+#    boot 200mb (sda1)
+#    encrypted-root 100%FREE (sda2)
+
+2) Mirrors
+# Fix the mirrors at /etc/pacman.d/mirrorlist
+
+3) Run the initial live cd script (scriptA)
+
+4) Run the system config script (scriptB)
+
+
+
+
