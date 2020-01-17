@@ -14,10 +14,10 @@ echo "KEYMAP=us" > /etc/vconsole.conf
 
 
 # Set a hostname in /etc/hostname
-echo "archlinux" > /etc/hostname 
+echo "thinkpad" > /etc/hostname 
 
 # Set hosts in /etc/hosts
-echo 127.0.1.1 archlinux.localdomain archlinux > /etc/hosts
+echo 127.0.1.1 thinkpad.localdomain thinkpad > /etc/hosts
 
 
 # Edit /ect/mkinitcpio.conf HOOKS

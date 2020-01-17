@@ -11,7 +11,7 @@ cryptsetup open /dev/sda2 cryptlvm
 pvcreate /dev/mapper/cryptlvm
 vgcreate MyVolGroup /dev/mapper/cryptlvm
 lvcreate -L 8G MyVolGroup -n swap
-lvcreate -L 32G MyVolGroup -n root
+lvcreate -l 100%FREE  MyVolGroup -n root
 
 # Format the logical partitions
 mkfs.ext4 /dev/MyVolGroup/root
@@ -29,8 +29,7 @@ mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
 # Install initial packages
-pacstrap /mnt base linux linux-firmware dhcpcd wpa_supplicant netctl dialog vim grub lvm2
-
+pacstrap /mnt base base-devel linux linux-firmware dhcpcd wpa_supplicant netctl dialog vim grub lvm2 
 
 # Fstab
 genfstab -U /mnt >> /mnt/etc/fstab
